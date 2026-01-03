@@ -208,7 +208,7 @@ const inmuebles = [
         id: "CZ276",
         titulo: "Adosado de 2 plantas en Masos", 
         precio: "235.000€", 
-        poblacion: "", 
+        poblacion: "Miami Platja", 
         tipo: "Miami Platja", 
         transaccion: "Compra", 
         fotos: [
@@ -978,4 +978,5 @@ const inmuebles = [
         baños: 2, 
         descripcion: "Finques TIVI3 te trae este acogedor piso en la zona de la TV3 de Sant Joan Despí. Cuenta con un salón-comedor bastante amplio con su propia terraza que da a un exterior con vistas al parque central de la manzana. 4 habitaciones, 2 de ellas con camas y armarios (1 de ellos empotrado), todas muy bien iluminadas gracias a sus ventanales. Una cocina completamente equipada la cual da acceso a un lavadero. 2 baños completos, uno con bañera y el otro con plato de ducha. Incluido en el precio viene una plaza propia en el parking del edificio."
     }
+
 ];
