@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Inmueble | Finques TIVI3</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/50G9h5Hs/logo4.png">
+    <style>
+        .container-detalle { padding: 40px 10%; max-width: 1200px; margin: auto; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        /* CARRUSEL FLUIDO */
+        .carousel { 
+            width: 100%; 
+            height: 500px; 
+            background: #000; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            position: relative; 
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-track img {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn-nav { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: rgba(0,0,0,0.5); 
+            color: white; 
+            border: none; 
+            padding: 18px; 
+            cursor: pointer; 
+            border-radius: 50%; 
+            font-size: 22px; 
+            z-index: 10;
+            transition: background 0.3s;
+        }
+
+        .btn-nav:hover { background: rgba(0,0,0,0.8); }
+        
+        /* INFORMACIÓN */
+        .info-header { display: flex; justify-content: space-between; align-items: baseline; margin: 30px 0 10px 0; }
+        .info-header h1 { margin: 0; color: #2c3e50; font-size: 2rem; }
+        .price-tag { color: #27ae60; font-size: 1.8rem; font-weight: bold; margin: 0; }
+
+        .specs { display: flex; gap: 20px; margin-bottom: 25px; padding: 20px; background: #f8f9fa; border-radius: 10px; border: 1px solid #eee; flex-wrap: wrap; }
+        .specs span { font-weight: 500; color: #555; display: flex; align-items: center; gap: 8px; }
+
+        .descripcion { line-height: 1.6; color: #444; margin-bottom: 40px; }
+        .descripcion h3 { border-bottom: 2px solid #eee; padding-bottom: 10px; color: #2c3e50; }
+
+        /* MEDIA QUERY PARA MÓVILES */
+            @media (max-width: 768px) {
+                .container-detalle { padding: 20px 5%; }
+                .carousel { height: 300px; } /* Evita que la foto sea eterna */
+                .info-header { 
+                    flex-direction: column; /* Título arriba, Precio abajo */
+                    align-items: flex-start; 
+                    gap: 5px; 
+                }
+                .info-header h1 { font-size: 1.4rem; }
+                .price-tag { font-size: 1.5rem; }
+            }
+
+        /* CONTACTO MEJORADO */
+        .contacto-box { 
+            background: #fff; 
+            padding: 40px; 
+            border-radius: 15px; 
+            border: 1px solid #e1e1e1; 
+            margin-top: 50px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+            text-align: center;
+        }
+
+        .contacto-box h3 { 
+            margin-bottom: 25px; 
+            color: #2c3e50; 
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+        .botones-contacto {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Separación perfecta entre botones */
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        /* Estilo base para todos los botones de contacto */
+        .btn-contacto {
+            padding: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-contacto:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-whatsapp { background: #25D366; color: white; }
+        .btn-whatsapp:hover { background: #1ebe57; }
+
+        .btn-tel { background: #2c3e50; color: white; }
+        .btn-tel:hover { background: #34495e; }
+
+        /* NUEVO BOTÓN AMARILLO */
+        .btn-email { background: #f1c40f; color: #2c3e50; }
+        .btn-email:hover { background: #f39c12; }
+
+        /* Esto hará que el logo se vea blanco sobre el fondo oscuro del nav */
+        .logo-detalle img {
+            filter: brightness(0) invert(1);
+        }       
+    </style>
+</head>
+<body>
+
+    <nav style="background: #ba181b; padding: 10px 10%; display: flex; justify-content: space-between; align-items: center;">
+        <a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1rem;">
+            ← Volver al catálogo
+        </a>
+    
+        <div class="logo-detalle">
+            <a href="index.html">
+                <img src="https://i.postimg.cc/cHNMW3VD/logo1.png" alt="Finques TIVI3" style="height: 45px; width: auto; display: block;">
+            </a>
+        </div>
+    </nav>
+    
+    <div class="container-detalle" id="detalle-inmueble"></div>
+
+    <script src="datos.js"></script>
+
+    <script>
+        
+        const params = new URLSearchParams(window.location.search);
+        const idUrl = params.get('id');
+        const contenedor = document.getElementById('detalle-inmueble');
+        
+        const casa = inmuebles.find(item => item.id.toString() === idUrl);
+
+        if (casa) {
+            let fotoActual = 0;
+            const imagenesHTML = casa.fotos.map(foto => `<img src="${foto}" alt="${casa.titulo}">`).join('');
+
+            // 1. Buscamos la descripción del pueblo o ponemos una por defecto
+            const textoPueblo = (typeof DESCRIPCIONES_PUEBLOS !== 'undefined' && DESCRIPCIONES_PUEBLOS[casa.poblacion]) 
+                                ? DESCRIPCIONES_PUEBLOS[casa.poblacion] 
+                                : `Descubre el encanto de vivir en ${casa.poblacion || 'esta zona'}, una ubicación privilegiada con todos los servicios.`;
+
+            // 2. Definimos el aviso legal
+            const avisoLegal = (typeof DISCLAIMER_LEGAL !== 'undefined') 
+                               ? DISCLAIMER_LEGAL 
+                               : "El precio no incluye impuestos ni gastos de escritura. La información es informativa y no contractual.";
+
+            contenedor.innerHTML = `
+                <div class="carousel">
+                    <div class="carousel-track" id="track">
+                        ${imagenesHTML}
+                    </div>
+                    ${casa.fotos.length > 1 ? `
+                        <button class="btn-nav" style="left:15px" onclick="mover(-1)">❮</button>
+                        <button class="btn-nav" style="right:15px" onclick="mover(1)">❯</button>
+                    ` : ''}
+                </div>
+
+                <div class="info-header">
+                    <h1>${casa.titulo}</h1>
+                    <p class="price-tag">${casa.precio}</p>
+                </div>
+
+                <div class="specs">
+                    ${casa.metros ? `<span>📐 ${casa.metros} m²</span>` : ''}
+                    ${casa.parcela ? `<span>🌳 Parcela: ${casa.parcela} m²</span>` : ''}
+                    ${casa.habitaciones ? `<span>🛏️ ${casa.habitaciones} hab.</span>` : ''}
+                    ${casa.baños ? `<span>🚿 ${casa.baños} baños</span>` : ''}
+                    ${casa.garaje ? `<span>🚗 Garaje</span>` : ''}
+                </div>
+
+                <div class="descripcion">
+                    <h3>Descripción de la propiedad</h3>
+                    <p>${casa.descripcion}</p>
+                    
+                    <div style="margin-top: 25px; padding: 15px; background: #eef2f3; border-radius: 8px;">
+                        <p style="margin: 0; color: #2c3e50;"><strong>📍</strong> ${textoPueblo}</p>
+                    </div>
+
+                    <p style="margin-top: 30px; color: #95a5a6; font-style: italic; font-size: 0.85rem; line-height: 1.4; border-top: 1px dashed #ccc; padding-top: 15px;">
+                        ${avisoLegal}
+                    </p>
+                </div>
+
+                <div class="contacto-box">
+                    <h3>¿Te interesa este inmueble?</h3>
+                    <div class="botones-contacto">
+                        <a href="https://wa.me/${CONTACTO_GLOBAL.whatsapp}?text=Hola, me interesa la propiedad: ${casa.titulo} (Ref: ${casa.id})" 
+                            class="btn-contacto btn-whatsapp" target="_blank">
+                            📱 Contactar por WhatsApp
+                        </a>
+
+                        <a href="tel:${CONTACTO_GLOBAL.telefono}" class="btn-contacto btn-tel">
+                            📞 Llamar al ${CONTACTO_GLOBAL.telefono}
+                        </a>
+
+                        <a href="mailto:${CONTACTO_GLOBAL.email}?subject=Interés en Ref ${casa.id}: ${casa.titulo}" 
+                            class="btn-contacto btn-email">
+                            ✉️ Enviar un Correo
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            window.mover = function(paso) {
+                const track = document.getElementById('track');
+                const totalFotos = casa.fotos.length;
+                fotoActual = (fotoActual + paso + totalFotos) % totalFotos;
+                track.style.transform = `translateX(-${fotoActual * 100}%)`;
+            }
+
+        } else {
+            contenedor.innerHTML = `
+                <div style="text-align:center; padding: 80px 20px;">
+                    <h2 style="color: #2c3e50;">Inmueble no encontrado</h2>
+                    <p style="color: #666; margin-bottom: 25px;">Lo sentimos, no hemos podido localizar la propiedad que buscas.</p>
+                    <a href="index.html" class="btn-contacto btn-tel" 
+                    style="display:inline-flex; width:auto; padding: 12px 30px; margin-top: 25px;">
+                    Volver al inicio
+                    </a>
+                </div>
+            `;
+        }
+    </script>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-oficina">
+                <img src="https://i.postimg.cc/50mjDQBh/oficina1.jpg" alt="Oficina Barcelona">
+                <div class="footer-info">
+                    <h4>Sucursal del Barcelonès</h4>
+                    <p>Carrer Oriol Martorell, 2</p>
+                    <p>00897 Sant Joan Despí, Barcelona</p>
+                </div>
+            </div>
+
+            <div class="footer-brand">
+                <div class="logo-footer">Finques TIVI3</div>
+                <p>Tu inmobiliaria de confianza</p>
+            </div>
+
+            <div class="footer-oficina">
+                <img src="https://i.postimg.cc/zX4DtkmC/oficina2.jpg" alt="Oficina Tivissa">
+                <div class="footer-info">
+                    <h4>Sucursal del Tarragonès</h4>
+                    <p>Avinguda Gil Vernet 34, Local 1</p>
+                    <p>43892 Miami Platja, Tarragona</p>
+                </div>
+            </div>
+        </div>
+        
+        <p class="copy">&copy; 2026 Finques TIVI3 - Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="datos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

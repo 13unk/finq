@@ -1,0 +1,782 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Header y Hero */
+header {
+    height: 60vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('https://i.postimg.cc/MH6LWNhC/header.jpg') no-repeat center center/cover;
+    color: white;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 5%; /* Bajamos un poco el padding lateral para móvil */
+    align-items: center;
+    background-color: #660708;
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-sizing: border-box; /* <--- ESTO ES VITAL */
+    z-index: 10;
+}
+
+/* Asegura que el contenedor deje pasar la imagen */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%; /* Para que use el alto del nav */
+    padding: 5px 0;
+}
+
+/* Fuerza a la imagen a ser visible */
+#img-logo {
+    height: 60px !important; /* El !important ayuda a saltarse bloqueos previos */
+    width: auto;
+    max-width: 200px;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Cambia el 70% por 100% para que use todo el header */
+    text-align: center;
+    gap: 15px;
+    padding-top: 80px; /* <--- ESTO empujará el texto hacia abajo para que no choque con el logo */
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.hero p {
+    font-size: 1.4rem;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Buscador */
+.search-container {
+    display: grid;
+    /* Crea 3 columnas iguales. '1fr' significa una fracción del espacio disponible */
+    grid-template-columns: repeat(3, 1fr); 
+    align-items: center; /* Centra los elementos verticalmente */
+    gap: 20px; /* Un poco más de espacio entre ellos para que respiren */
+    padding: 30px;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra un poco más profunda para dar relieve */
+    margin: -50px auto 20px;
+    width: 90%;
+    max-width: 1000px;
+    border-radius: 15px; /* Un poco más redondeado para ir a juego con los botones */
+    position: relative;
+    z-index: 10;
+}
+
+/* Ajuste para tablets (2 columnas y la tercera abajo) o móviles (1 sola columna) */
+@media (max-width: 850px) {
+    .search-container {
+        grid-template-columns: 1fr; /* Un elemento por fila */
+        gap: 20px;
+        padding: 20px;
+        margin-top: -30px; /* Lo subimos un poco menos para que no tape tanto texto en móvil */
+    }
+}
+
+.search-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 150px;
+}
+
+.search-group label {
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.search-group select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+    cursor: pointer;
+}
+
+#btn-buscar {
+    padding: 12px 30px;
+    background: #ba181b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#btn-buscar:hover {
+    background: #660708;
+}
+
+/* Catálogo - Aseguramos que todas las tarjetas de la fila midan lo mismo */
+.catalog {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 40px 10%;
+    align-items: stretch; 
+}
+
+/* La tarjeta - Debe ser flex para que sus hijos (img y content) se organicen */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* El contenido - AQUÍ ESTÁ EL TRUCO: flex-grow: 1 fuerza a esta caja a estirarse */
+.card-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Esto obliga al contenedor a rellenar el espacio sobrante */
+}
+
+.btn-detail-modern {
+    margin-top: auto !important; /* Fuerza el margen superior automático */
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 3. EL PRECIO (Para que no se pegue al título) */
+.price {
+    color: #ba181b;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: auto; /* Empuja el precio al fondo si el título es de 1 sola línea */
+}
+
+/* Footer */
+footer {
+    background: #ba181b;
+    color: white;
+    padding: 60px 10% 20px 10%;
+    margin-top: 50px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap; /* Para que en el móvil se pongan una debajo de otra */
+}
+
+.footer-oficina {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-oficina img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-info h4 {
+    color: #ffffff; 
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.footer-info p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+.footer-brand {
+    flex: 1;
+    text-align: center;
+    min-width: 200px;
+}
+
+.logo-footer {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.copy {
+    margin-top: 50px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    font-size: 0.8rem;
+    opacity: 0.5;
+    text-align: center;
+}
+
+/* Ajuste móvil */
+@media (max-width: 768px) {
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centra horizontalmente los bloques */
+        justify-content: center;
+        text-align: center;   /* Centra el texto dentro de los bloques */
+        gap: 40px;            /* Espacio generoso entre secciones */
+        padding: 40px 0;      /* Espacio arriba y abajo */
+    }
+
+    /* El orden que pediste: Texto primero */
+    .footer-brand {
+        order: -1;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    /* Las cajas de las oficinas */
+    .footer-oficina {
+        order: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;  /* Centra la imagen y el texto internamente */
+        margin: 0 !important; /* Elimina márgenes que puedan estar empujando a los lados */
+    }
+
+    /* Las imágenes de las oficinas */
+    .footer-oficina img {
+        width: 80%;           /* Que no ocupen todo el ancho para que se vea mejor */
+        max-width: 300px;     /* Pero que tampoco sean gigantes */
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+
+    /* El bloque de texto de cada oficina */
+    .footer-info {
+        text-align: center;   /* Forzamos el centrado del texto */
+        width: 100%;
+    }
+}
+
+/* Contenedor de características técnicas */
+.specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 0.85rem;
+    color: #555;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.specs span {
+    display: flex;
+    align-items: center;
+    background: #f0f2f5;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.specs .icon {
+    margin-right: 5px;
+    font-style: normal;
+}
+
+/* Contenedor de imagen para posicionar las etiquetas */
+.card-img-container {
+    position: relative;
+    height: 200px;
+}
+
+.card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Etiquetas flotantes sobre la foto */
+.card-tags {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.tag-transaccion {
+    background: #ba181b;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.tag-poblacion {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+}
+
+/* Estilo para el tipo de inmueble arriba del título */
+.tipo-texto {
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+/* Botón de Ver Detalles Moderno */
+.btn-detail-modern {
+    width: 100%;
+    background: #ba181b;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+.btn-detail-modern:hover {
+    background: #660708;
+}
+
+/* Animación de entrada suave para cada tarjeta */
+@keyframes entradaSuave {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.card {
+    /* ... busca tu clase .card y añade esta línea ... */
+    animation: entradaSuave 0.4s ease-out forwards;
+}
+
+
+/* Estado inicial: oculto y un poco desplazado hacia abajo */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+/* Estado cuando el scroll llega a la sección */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.retraso-1 { transition-delay: 0.2s; }
+.retraso-2 { transition-delay: 0.4s; }
+
+/* Aplicamos sombra y estilo a las fotos de las tres secciones */
+.nosotros-img, 
+.asesoramiento-img {
+    border-radius: 12px; /* Bordes redondeados suaves */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Sombra: desplazamiento horizontal, vertical, desenfoque y color */
+    transition: transform 0.3s ease; /* Para que al pasar el ratón se mueva suave */
+}
+
+/* Efecto opcional: cuando pasas el ratón, la sombra se intensifica un poco */
+.nosotros-img:hover, 
+.asesoramiento-img:hover {
+    transform: translateY(-5px); /* La foto "flota" un poquito */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor principal del botón */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px; /* Distancia del borde inferior */
+    right: 30px;  /* Distancia del borde derecho */
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    box-shadow: 2px 5px 15px rgba(0,0,0,0.3);
+    z-index: 1000; /* Siempre por encima de todo */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    animation: flotar 3s ease-in-out infinite; /* Movimiento constante */
+}
+
+/* El icono de WhatsApp */
+.whatsapp-icon {
+    width: 35px;
+    height: 35px;
+}
+
+/* El texto al lado del icono (se oculta en móviles si quieres) */
+.whatsapp-text {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    margin-left: 8px;
+    font-size: 14px;
+}
+
+/* Efecto al pasar el ratón */
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+    box-shadow: 2px 10px 20px rgba(0,0,0,0.4);
+}
+
+/* Animación de flotado suave */
+@keyframes flotar {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Ajuste para móviles: ocultamos el texto para que solo sea la pelota */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px;
+    }
+    .whatsapp-text {
+        display: none; /* En móvil solo queda el círculo con el logo */
+    }
+}
+
+.instagram-float {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* Aquí está el truco: a la izquierda */
+    background-color: #E1306C; /* Color oficial de Instagram */
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    z-index: 1000;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.instagram-float:hover {
+    transform: scale(1.05);
+    background-color: #C13584;
+}
+
+.instagram-icon {
+    width: 35px;
+    height: 35px;
+}
+
+.instagram-text {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* En móviles, si ves que molestan mucho los dos botones, 
+   podemos ocultar el texto y dejar solo los iconos */
+@media (max-width: 768px) {
+    .instagram-text {
+        display: none;
+    }
+    .instagram-float {
+        padding: 10px;
+        bottom: 15px;
+        left: 15px;
+    }
+}
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10%;
+    align-items: center;
+    /* Un degradado sutil arriba para que el logo blanco siempre resalte */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+    position: absolute; /* Para que flote sobre la imagen del hero */
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+}
+
+.carousel::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background-image: url('https://i.postimg.cc/MHM0wY9Z/watermark.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.4; /* Muy clarito para que no moleste a la vista */
+    pointer-events: none;
+    z-index: 5;
+}
+
+.carousel {
+    margin-top: 60px; /* Ajusta este número según cuánto espacio quieras */
+    position: relative;
+    border-radius: 12px; /* Ya que estamos, le damos unas esquinas redondeadas para que quede más fino */
+    overflow: hidden;
+}
+
+/* Estilos para el Knob-Slider */
+.switch-container {
+    width: 100%; /* Ahora se adapta al ancho de la columna del grid */
+    margin-top: 5px;
+}
+
+.switch-input {
+    display: none;
+}
+
+.switch-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #e0e0e0;
+    border-radius: 50px;
+    position: relative;
+    height: 46px; /* Aumentado ligeramente para igualar la altura de los selectores */
+    cursor: pointer;
+    user-select: none;
+    border: 2px solid #ddd;
+    width: 100%; /* Asegura que ocupe todo el grupo */
+}
+
+.switch-option {
+    width: 50%;
+    text-align: center;
+    z-index: 2;
+    font-weight: bold;
+    color: #555;
+    transition: color 0.3s ease;
+    font-size: 14px;
+}
+
+.switch-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(50% - 4px);
+    height: calc(100% - 4px);
+    background: #ba181b; 
+    border-radius: 50px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Sombra suave en el botón */
+}
+
+/* --- LÓGICA DE ESTADOS --- */
+
+.switch-input:checked + .switch-label .switch-knob {
+    transform: translateX(100%);
+}
+
+.switch-input:not(:checked) + .switch-label .switch-option:nth-child(1) {
+    color: #ffffff !important;
+}
+.switch-input:not(:checked) + .switch-label .switch-option:nth-child(2) {
+    color: #555555 !important;
+}
+
+.switch-input:checked + .switch-label .switch-option:nth-child(1) {
+    color: #555555 !important;
+}
+.switch-input:checked + .switch-label .switch-option:nth-child(2) {
+    color: #ffffff !important;
+}
+
+/* --- EFECTOS DE INTERACCIÓN (HOVER) --- */
+
+.switch-label:hover {
+    background: #d4d4d4; /* Fondo un poco más oscuro al pasar el ratón */
+    border-color: #ccc;
+}
+
+.switch-label:hover .switch-knob {
+    background: #a41618; /* El rojo se vuelve un poco más intenso */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* La sombra del botón crece */
+}
+
+.switch-label:active .switch-knob {
+    transform: scale(0.95); /* Efecto de pulsación al hacer clic */
+}
+
+/* Estilos para los Selectores Personalizados */
+.custom-select {
+    position: relative;
+    width: 100%;
+    user-select: none;
+}
+
+.select-trigger {
+    padding: 0 20px; /* Quitamos el padding vertical para controlar la altura con 'height' */
+    height: 46px;    /* Misma altura que el switch */
+    background: #f9f9f9;
+    border: 2px solid #ddd;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.select-trigger:hover {
+    background: #fff;
+    border-color: #ba181b; /* Color rojo al pasar el ratón */
+}
+
+.select-trigger .arrow {
+    border: solid #555;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    transition: transform 0.3s;
+}
+
+.custom-select.open .select-trigger .arrow {
+    transform: rotate(-135deg);
+}
+
+.select-options {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.custom-select.open .select-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.option {
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.option:hover {
+    background: #f0f2f5;
+    color: #ba181b;
+}
+
+.option.selected {
+    background: #ba181b;
+    color: white;
+}
+
+.separator-container {
+    width: 100%;
+    padding: 60px 0; /* Espacio arriba y abajo del separador */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.elegant-line {
+    width: 80%; /* No llega hasta los bordes, lo que lo hace más fino */
+    height: 1px;
+    /* Degradado que se apaga en los extremos */
+    background: linear-gradient(to right, transparent, #ddd, #ba181b, #ddd, transparent);
+    position: relative;
+    opacity: 0.6;
+}
+
+/* La "sombrita" estilizada debajo de la línea */
+.elegant-line::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 10%;
+    width: 80%;
+    height: 15px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(5px);
+}
