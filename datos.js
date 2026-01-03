@@ -209,7 +209,7 @@ const inmuebles = [
         titulo: "Adosado de 2 plantas en Masos", 
         precio: "235.000€", 
         poblacion: "Miami Platja", 
-        tipo: "Miami Platja", 
+        tipo: "Casa", 
         transaccion: "Compra", 
         fotos: [
             "https://i.postimg.cc/VNfPN6Fq/cz276-01.jpg",
@@ -980,3 +980,4 @@ const inmuebles = [
     }
 
 ];
+
