@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="https://i.postimg.cc/50G9h5Hs/logo4.png">
     <style>
-        /* Estilos rápidos para las nuevas secciones */
         .nosotros-section, .gestoria-section, .asesoramiento-section { 
             padding: 60px 10%; 
             background: #fff; 
@@ -27,9 +26,7 @@
         .contacto-directo { padding: 60px 10%; background: #f4f4f4; text-align: center; }
         .contacto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
         .contacto-card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        
 
-        /* Animación de entrada para las tarjetas */
         @keyframes fadeIn {
             from { 
                 opacity: 0; 
@@ -42,25 +39,19 @@
         }
 
         .inmueble-card {
-            /* ... mantén tus estilos actuales y añade esto: */
             animation: fadeIn 0.4s ease-out;
         }
 
-        /* CONFIGURACIÓN PARA MÓVIL */
         @media (max-width: 768px) {
             .nosotros-section, .gestoria-section, .asesoramiento-section { 
                 flex-direction: column; 
                 text-align: center; 
-                padding: 40px 5%; /* Un poco menos de relleno en móvil queda mejor */
+                padding: 40px 5%; 
             }
-
-            /* Forzamos que la imagen de gestoría sea lo primero que se vea en el móvil */
             .gestoria-img {
                 order: -1; 
-                margin-bottom: 10px; /* Separación con el texto que ahora queda debajo */
+                margin-bottom: 10px; 
             }
-
-            /* También para las demás, por si acaso quieres asegurar el orden imagen -> texto */
             .nosotros-img, .asesoramiento-img {
                 order: -1;
                 margin-bottom: 10px;
@@ -102,49 +93,47 @@
             </div>
         </div>
 
-<div class="search-group">
-    <label>Tipo de inmueble</label>
-    <div class="custom-select" id="custom-tipo">
-        <div class="select-trigger"><span>Cualquiera</span><i class="arrow"></i></div>
-        <div class="select-options">
-            <div class="option selected" data-value="todos">Todos los tipos</div>
-            <div class="option" data-value="Casa">Casa</div>
-            <div class="option" data-value="Piso">Piso</div>
-            <div class="option" data-value="Local">Local</div>
-            <div class="option" data-value="Nave">Nave</div>
-            <div class="option" data-value="Terreno">Terreno</div>
-            <div class="option" data-value="Parking">Parking</div>
-            <div class="option" data-value="Trastero">Trastero</div>
+        <div class="search-group">
+            <label>Tipo de inmueble</label>
+            <div class="custom-select" id="custom-tipo">
+                <div class="select-trigger"><span>Cualquiera</span><i class="arrow"></i></div>
+                <div class="select-options">
+                    <div class="option selected" data-value="todos">Todos los tipos</div>
+                    <div class="option" data-value="Casa">Casa</div>
+                    <div class="option" data-value="Piso">Piso</div>
+                    <div class="option" data-value="Local">Local</div>
+                    <div class="option" data-value="Nave">Nave</div>
+                    <div class="option" data-value="Terreno">Terreno</div>
+                    <div class="option" data-value="Parking">Parking</div>
+                    <div class="option" data-value="Trastero">Trastero</div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<div class="search-group">
-    <label>Población</label>
-    <div class="custom-select" id="custom-poblacion">
-        <div class="select-trigger"><span>Cualquiera</span><i class="arrow"></i></div>
-        <div class="select-options">
-            <div class="option selected" data-value="todos">Todas las zonas</div>
-            <div class="option" data-value="Miami Platja">Miami Platja</div>
-            <div class="option" data-value="Hospitalet de l'Infant">Hospitalet de l'Infant</div>
-            <div class="option" data-value="Cambrils">Cambrils</div>
-            <div class="option" data-value="Tarragona">Tarragona</div>
-            <div class="option" data-value="Tivissa">Tivissa</div>
-            <div class="option" data-value="Sant Joan Despí">Sant Joan Despí</div>
-            <div class="option" data-value="Cornellà de Llobregat">Cornellà de Llobregat</div>
-            <div class="option" data-value="La Seu d'Urgell">La Seu d'Urgell</div>
+        <div class="search-group">
+            <label>Población</label>
+            <div class="custom-select" id="custom-poblacion">
+                <div class="select-trigger"><span>Cualquiera</span><i class="arrow"></i></div>
+                <div class="select-options">
+                    <div class="option selected" data-value="todos">Todas las zonas</div>
+                    <div class="option" data-value="Miami Platja">Miami Platja</div>
+                    <div class="option" data-value="Hospitalet de l'Infant">Hospitalet de l'Infant</div>
+                    <div class="option" data-value="Cambrils">Cambrils</div>
+                    <div class="option" data-value="Tarragona">Tarragona</div>
+                    <div class="option" data-value="Tivissa">Tivissa</div>
+                    <div class="option" data-value="Sant Joan Despí">Sant Joan Despí</div>
+                    <div class="option" data-value="Cornellà de Llobregat">Cornellà de Llobregat</div>
+                    <div class="option" data-value="La Seu d'Urgell">La Seu d'Urgell</div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
     </section>
 
-    <main class="catalog" id="contenedor-inmuebles">
-        </main>
+    <main class="catalog" id="contenedor-inmuebles"></main>
 
-<div class="separator-container">
-    <div class="elegant-line"></div>
-</div>
+    <div class="separator-container">
+        <div class="elegant-line"></div>
+    </div>
 
     <section class="nosotros-section reveal" id="nosotros">
         <img src="https://i.postimg.cc/MH6LWNhC/header.jpg" alt="Nuestra oficina" class="nosotros-img">
@@ -154,7 +143,6 @@
             <p>En <strong>Fincas TIVI3</strong> buscamos ofrecer un servicio integral para nuestros clientes. Para conseguirlo, disponemos de un amplio abanico de servicios directos y a través de acuerdos de colaboración con los mejores profesionales de cada sector que tienen como premisa la misma filosofía de trato excelente, de cualidad y a un precio de mercado altamente competitivo. Además de buscar un inmueble para comprar / alquilar / vender, precisa de un seguro de hogar, coche, alquileres; o bien problemas para encontrar una financiación adecuada para obtener la vivienda que desea, nosotros le ayudamos a conseguir sus propósitos.</p>
             <p>También ponemos a su disposición los servicios, por si precisa, de asesoramiento fiscal / laboral para usted o su familia, o desea reformar o mejorar su vivienda.</p>
         </div>
-
     </section>
 
     <section class="asesoramiento-section reveal" id="asesoramiento">
@@ -167,7 +155,6 @@
         </div>
         <img src="https://i.postimg.cc/tgv96dz7/asesoramiento.jpg" alt="Asesoramiento contable" class="asesoramiento-img">
     </section>
-
 
     <section class="contacto-directo" id="contacto">
         <h2>¿Necesitas ayuda personalizada?</h2>
@@ -214,30 +201,21 @@
                 </div>
             </div>
         </div>
-        
         <p class="copy">&copy; 2026 Finques TIVI3 - Todos los derechos reservados.</p>
     </footer>
 
     <script src="datos.js"></script>
     <script src="script.js"></script>
 
-<a href="https://www.instagram.com/tivi3__" 
-    class="instagram-float" 
-    target="_blank" 
-    title="Síguenos en Instagram">
-     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" class="instagram-icon">
-     <span class="instagram-text">Instagram</span>
- </a>
+    <a href="https://www.instagram.com/tivi3__" class="instagram-float" target="_blank" title="Síguenos en Instagram">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" class="instagram-icon">
+        <span class="instagram-text">Instagram</span>
+    </a>
 
-<a href="https://wa.me/34655296123?text=Hola! Estoy viendo vuestra web y me gustaría recibir información." 
-   class="whatsapp-float" 
-   target="_blank" 
-   title="Contactar por WhatsApp">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="whatsapp-icon">
-    <span class="whatsapp-text">Contactar</span>
-</a>
-
+    <a href="https://wa.me/34655296123?text=Hola! Estoy viendo vuestra web y me gustaría recibir información." class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="whatsapp-icon">
+        <span class="whatsapp-text">Contactar</span>
+    </a>
 
 </body>
 </html>
-
